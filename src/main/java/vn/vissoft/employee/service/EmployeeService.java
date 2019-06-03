@@ -6,9 +6,14 @@ import java.util.List;
 
 @Service
 public interface EmployeeService {
-    List<Employee> findAll();
-    Employee findById(Long id);
-    void save(Employee employee);
 
-    void deleteById(Long id);
+    List<Employee> findAll();
+
+    Employee findById(Long id);
+
+    void create(Employee employee);
+
+    void update(Employee employee);
+
+    void deleteById(Employee employee);
 }

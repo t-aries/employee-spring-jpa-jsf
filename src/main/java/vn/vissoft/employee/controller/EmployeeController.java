@@ -20,9 +20,23 @@ public class EmployeeController {
 
     private List<Employee> employees;
 
+    private Employee employee;
+
     @PostConstruct
     public void init() {
+
         employees = employeeService.findAll();
+    }
+
+    public String add() {
+        this.employee = new Employee();
+        return "/employee-create.xhtml?faces-redirect=true";
+    }
+
+    public String save() {
+        this.employee = new Employee();
+        this.employeeService.create(employee);
+        return "/employee-list.xhtml?faces-redirect=true";
     }
 
     public List<Employee> getEmployees() {
@@ -31,5 +45,13 @@ public class EmployeeController {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

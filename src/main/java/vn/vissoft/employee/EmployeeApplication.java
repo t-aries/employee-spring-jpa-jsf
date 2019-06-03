@@ -9,6 +9,8 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import vn.vissoft.employee.repository.EmployeeRepository;
+import vn.vissoft.employee.repository.EmployeeRepositoryImpl;
 import vn.vissoft.employee.service.EmployeeService;
 import vn.vissoft.employee.service.EmployeeServiceImpl;
 
@@ -25,8 +27,13 @@ public class EmployeeApplication extends SpringBootServletInitializer {
     }
 
     @Bean
+    public EmployeeRepository employeeRepository(){
+        return new EmployeeRepositoryImpl();
+    }
+
+    @Bean
     public EmployeeService employeeService(){
-        return new EmployeeServiceImpl();
+        return new EmployeeServiceImpl(employeeRepository());
     }
 
     @Bean

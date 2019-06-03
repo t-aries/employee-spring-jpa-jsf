@@ -12,28 +12,28 @@
             <h3>New Employee</h3>
 
             <h:outputLabel value="Name: "/>
-            <h:inputText id="name" value="#{employeeCreateController.employee.name}"/><br></br>
+            <h:inputText id="name" value="#{employeeController.employee.name}"/><br></br>
 
             <h:outputLabel value="Employee Code: "/>
-            <h:inputText id="employeeCode" value="#{employeeCreateController.employee.employeeCode}"/><br></br>
+            <h:inputText id="employeeCode" value="#{employeeController.employee.employeeCode}"/><br></br>
 
             <h:outputLabel value="Manager: "/>
-            <h:inputText id="manager" value="#{employeeCreateController.employee.manager}"/><br></br>
+            <h:inputText id="manager" value="#{employeeController.employee.manager}"/><br></br>
 
             <h:outputLabel value="Date Start: "/>
-            <h:inputText id="dateStart" value="#{employeeCreateController.employee.dateStart}"/><br></br>
+            <h:inputText id="dateStart" value="#{employeeController.employee.dateStart}"/><br></br>
 
             <h:outputLabel value="Work: "/>
-            <h:inputText id="work" value="#{employeeCreateController.employee.work}"/><br></br>
+            <h:inputText id="work" value="#{employeeController.employee.work}"/><br></br>
 
             <h:outputLabel value="Department: "/>
-            <h:inputText id="department" value="#{employeeCreateController.employee.department}"/><br></br>
+            <h:inputText id="department" value="#{employeeController.employee.department}"/><br></br>
 
             <h:outputLabel value="Salary: "/>
-            <h:inputText id="salary" value="#{employeeCreateController.employee.salary}"/><br></br>
+            <h:inputText id="salary" value="#{employeeController.employee.salary}"/><br></br>
 
 
-            <h:commandButton value="Save" action="#{employeeCreateController.add()}"/>
+            <h:commandButton value="Save" action="#{employeeController.save()}"/>
         </h:form>
 
     </f:view>
