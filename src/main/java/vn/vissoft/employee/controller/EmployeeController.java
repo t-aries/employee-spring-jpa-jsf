@@ -1,16 +1,22 @@
 package vn.vissoft.employee.controller;
 
 import org.ocpsoft.rewrite.annotation.Join;
+import org.primefaces.event.CloseEvent;
+import org.primefaces.event.MoveEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import vn.vissoft.employee.model.Employee;
 import vn.vissoft.employee.service.EmployeeService;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.util.List;
 
 @SessionScoped
+//@ManagedBean(name = "employeeController")
 @Named
 @Join(path = "/", to = ("/employee-list.jsf"))
 public class EmployeeController {
@@ -20,7 +26,7 @@ public class EmployeeController {
 
     private List<Employee> employees;
 
-    private Employee employee;
+    private Employee employee = new Employee();
 
     @PostConstruct
     public void init() {
@@ -34,10 +40,29 @@ public class EmployeeController {
     }
 
     public String save() {
-        this.employee = new Employee();
         this.employeeService.create(employee);
+        employees = employeeService.findAll();
         return "/employee-list.xhtml?faces-redirect=true";
     }
+
+    public String delete(Employee employee) {
+        this.employeeService.delete(employee);
+        employees = employeeService.findAll();
+        return "/employee-list.xhtml?faces-redirect=true";
+    }
+
+
+    public String viewEdit(Employee employee){
+        this.employee = employee;
+        return "/employee-edit.xhtml?faces-redirect=true";
+    }
+
+    public String editEmployee(Employee employee) {
+        this.employeeService.update(employee);
+        employees = employeeService.findAll();
+        return "/employee-list.xhtml?faces-redirect=true";
+    }
+
 
     public List<Employee> getEmployees() {
         return employees;

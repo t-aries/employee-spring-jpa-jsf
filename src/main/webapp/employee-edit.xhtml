@@ -9,7 +9,7 @@
 <h:body>
     <f:view>
         <h:form>
-            <h3>New Employee</h3>
+            <h3>Update Employee</h3>
             <table>
                 <tr>
                     <td>Name</td>
@@ -52,7 +52,7 @@
                     <td><h:inputText id="salary" value="#{employeeController.employee.salary}"/></td>
                 </tr>
                 <tr>
-                    <td><h:commandButton value="Save" action="#{employeeController.save()}"/></td>
+                    <td><h:commandButton value="Save" action="#{employeeController.editEmployee(employeeController.employee)}"/></td>
                 </tr>
 
             </table>

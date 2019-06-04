@@ -2,13 +2,16 @@ package vn.vissoft.employee.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.security.acl.Group;
 
 @Entity
 @Table(name = "employeesss")
+@SequenceGenerator(name="seq")
 public class Employee implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
     private Long id;
 
     @Column(name = "employee_code")
@@ -33,6 +36,10 @@ public class Employee implements Serializable {
     @Column(name = "date_start")
     private String dateStart;
 
+//    @ManyToOne
+//    @JoinColumn(name = "group_id")
+//    private Group group;
+
 
     public Employee() {
     }
@@ -45,6 +52,7 @@ public class Employee implements Serializable {
         this.salary = salary;
         this.work = work;
         this.dateStart = dateStart;
+       // this.group = group;
     }
 
     public Employee(int i, String name) {

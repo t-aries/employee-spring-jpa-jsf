@@ -1,22 +1,20 @@
 package vn.vissoft.employee.repository;
 
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import vn.vissoft.employee.model.Employee;
 
 import java.util.List;
 
 
-public interface EmployeeRepository  {
+public interface EmployeeRepository {
 
-    public List findAll();
+    List findAll();
 
-    public Employee findById(Long id);
+    Employee findById(Long id);
 
-    public void create(Employee employee);
+    void create(Employee employee);
 
-    public void deleteById(Employee employee);
+    void delete(Employee employee);
 
-    public void update(Employee employee);
+    void update(Employee employee);
 }
