@@ -25,21 +25,28 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     @Override
-    public List<Employee> findByName(String name, String employeeCode, String department) {
+    public List<Employee> findByName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo) {
+
         String sql = "select e from Employee e where 1=1 ";
 
         if (!"".equals(name)) {
             sql = sql + " and (e.name like:name)";
         }
+
         if (!"".equals(employeeCode)) {
             sql = sql + " and (e.employeeCode like:employeeCode)";
         }
+
         if (!"".equals(department)) {
             sql = sql + " and (e.department like:department)";
         }
-//        if (salary != null) {
-//            sql = sql + " and (e.department between :num1 and :num2)";
-//        }
+
+        if (salaryFrom != null) {
+            sql = sql + " and (e.salary >:salaryFrom )";
+        }
+        if (salaryTo != null) {
+            sql = sql + " and (e.salary <:salaryTo )";
+        }
 
         Query query = entityManager.createQuery(sql);
 
@@ -52,9 +59,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         if (!"".equals(department)) {
             query.setParameter("department", "%" + department + "%");
         }
-//        if (salary != null) {
-//            query.setParameter("num1", salary);
-//        }
+
+        Double num1=null;
+        Double num2 = null;
+        if (salaryFrom != null) {
+            query.setParameter("salaryFrom", salaryFrom);
+            // query.setParameter("num2", salary);
+        }
+        if (salaryTo != null) {
+            query.setParameter("salaryTo", salaryTo);
+            // query.setParameter("num2", salary);
+        }
 
         return query.getResultList();
     }

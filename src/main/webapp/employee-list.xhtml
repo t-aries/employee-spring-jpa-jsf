@@ -13,29 +13,37 @@
     <h:form>
         <h3>Employee List</h3>
 
+<!--        search-->
+        <p:outputLabel value="Name:         "/>
+        <p:inputText id="name" value="#{employeeController.employee.name}"/><br/>
 
-            <p:outputLabel value="Name:         "/>
-            <p:inputText id="name" value="#{employeeController.employee.name}"/><br/>
+        <p:outputLabel value="Employee Code: "/>
+        <p:inputText id="employeeCode" value="#{employeeController.employee.employeeCode}"/><br/>
 
-           <p:outputLabel value="Employee Code: "/>
-            <p:inputText id="employeeCode" value="#{employeeController.employee.employeeCode}"/><br/>
+        <p:outputLabel value="Department:   "/>
+        <h:selectOneMenu id="department" value="#{employeeController.employee.department}">
+            <f:selectItem itemLabel="" itemValue=""/>
+            <f:selectItem itemLabel="DEV" itemValue="DEV"/>
+            <f:selectItem itemLabel="Business" itemValue="Business"/>
+            <f:selectItem itemLabel="HR" itemValue="HR"/>
+        </h:selectOneMenu><br/>
 
-            <p:outputLabel value="Department:   "/>
-            <h:selectOneMenu id="department" value="#{employeeController.employee.department}">
-                <f:selectItem itemLabel="" itemValue=""/>
-                <f:selectItem itemLabel="DEV" itemValue="DEV"/>
-                <f:selectItem itemLabel="Business" itemValue="Business"/>
-                <f:selectItem itemLabel="HR" itemValue="HR"/>
-            </h:selectOneMenu><br/>
+        <p:outputLabel value="Salary from: "/>
+        <p:inputText id="num1" value="#{employeeController.salaryFrom}"/>
 
+        <p:outputLabel value=" to: "/>
+        <p:inputText id="num2" value="#{employeeController.salaryTo}"/><br/>
 
-            <h:commandButton value="Search"
-                             action="#{employeeController.searchName(employeeController.employee.name,
+        <h:commandButton value="Search"
+                         action="#{employeeController.searchName(employeeController.employee.name,
                              employeeController.employee.employeeCode,
-                             employeeController.employee.department)}"/><br/>
+                             employeeController.employee.department,employeeController.salaryFrom,employeeController.salaryTo)}"/><br/>
         <h:commandButton value="Back to list" action="#{employeeController.init()}"/>
 
+<!--        Add employee-->
         <h:commandButton action="#{employeeController.add()}" value="Add employee"/>
+
+<!--        List table-->
         <p:dataTable var="emp" value="#{employeeController.employees}">
 
             <p:column headerText="Code">

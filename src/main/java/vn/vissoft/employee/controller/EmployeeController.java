@@ -28,6 +28,26 @@ public class EmployeeController {
 
     private Employee employee = new Employee();
 
+    private String name;
+    private String salaryFrom;
+    private String salaryTo;
+
+    public String getSalaryFrom() {
+        return salaryFrom;
+    }
+
+    public void setSalaryFrom(String salaryFrom) {
+        this.salaryFrom = salaryFrom;
+    }
+
+    public String getSalaryTo() {
+        return salaryTo;
+    }
+
+    public void setSalaryTo(String salaryTo) {
+        this.salaryTo = salaryTo;
+    }
+
     @PostConstruct
     public void init() {
 
@@ -63,11 +83,28 @@ public class EmployeeController {
         return "/employee-list.xhtml?faces-redirect=true";
     }
 
-    public String searchName(String name, String employeeCode, String department){
-        employees = employeeService.findByName(name,employeeCode,department);
+    public String searchName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo){
+        employees = employeeService.findByName(name,employeeCode,department, salaryFrom, salaryTo);
         return "employee-list.xhtml?faces-redirect=true";
     }
+    private Double num1;
+    private Double num2;
 
+    public Double getNum1() {
+        return num1;
+    }
+
+    public void setNum1(Double num1) {
+        this.num1 = num1;
+    }
+
+    public Double getNum2() {
+        return num2;
+    }
+
+    public void setNum2(Double num2) {
+        this.num2 = num2;
+    }
 
     public List<Employee> getEmployees() {
         return employees;
@@ -83,5 +120,21 @@ public class EmployeeController {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public EmployeeService getEmployeeService() {
+        return employeeService;
+    }
+
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
