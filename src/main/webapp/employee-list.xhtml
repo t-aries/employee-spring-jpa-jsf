@@ -12,7 +12,30 @@
 <h:body>
     <h:form>
         <h3>Employee List</h3>
-        <h:commandLink action="#{employeeController.add()}" value="Add employee"/>
+
+
+            <p:outputLabel value="Name:         "/>
+            <p:inputText id="name" value="#{employeeController.employee.name}"/><br/>
+
+           <p:outputLabel value="Employee Code: "/>
+            <p:inputText id="employeeCode" value="#{employeeController.employee.employeeCode}"/><br/>
+
+            <p:outputLabel value="Department:   "/>
+            <h:selectOneMenu id="department" value="#{employeeController.employee.department}">
+                <f:selectItem itemLabel="" itemValue=""/>
+                <f:selectItem itemLabel="DEV" itemValue="DEV"/>
+                <f:selectItem itemLabel="Business" itemValue="Business"/>
+                <f:selectItem itemLabel="HR" itemValue="HR"/>
+            </h:selectOneMenu><br/>
+
+
+            <h:commandButton value="Search"
+                             action="#{employeeController.searchName(employeeController.employee.name,
+                             employeeController.employee.employeeCode,
+                             employeeController.employee.department)}"/><br/>
+        <h:commandButton value="Back to list" action="#{employeeController.init()}"/>
+
+        <h:commandButton action="#{employeeController.add()}" value="Add employee"/>
         <p:dataTable var="emp" value="#{employeeController.employees}">
 
             <p:column headerText="Code">
@@ -44,17 +67,16 @@
             </p:column>
 
 
-
             <p:column headerText="DELETE">
                 <p:commandButton value="DELETE" action="#{employeeController.delete(emp)}">
-                    <p:confirm header="Confirmation" message="Are you sure Delete employee: #{emp.name} ?" icon="pi pi-exclamation-triangle" />
+                    <p:confirm header="Confirmation" message="Are you sure Delete employee: #{emp.name} ?"
+                               icon="pi pi-exclamation-triangle"/>
                 </p:commandButton>
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"/>
                 </p:confirmDialog>
             </p:column>
-
 
 
             <p:column headerText="EDIT">

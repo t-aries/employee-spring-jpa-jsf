@@ -63,6 +63,11 @@ public class EmployeeController {
         return "/employee-list.xhtml?faces-redirect=true";
     }
 
+    public String searchName(String name, String employeeCode, String department){
+        employees = employeeService.findByName(name,employeeCode,department);
+        return "employee-list.xhtml?faces-redirect=true";
+    }
+
 
     public List<Employee> getEmployees() {
         return employees;

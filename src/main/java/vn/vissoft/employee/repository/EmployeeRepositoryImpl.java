@@ -22,19 +22,47 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         Query query = entityManager.createQuery("select e FROM Employee e");
         return query.getResultList();
 
-        }
+    }
 
     @Override
-    public Employee findById(Long id) {
-        Query query = entityManager.createQuery("select e from Employee e where e.id=:id")
-                .setParameter("id", id);
-        return (Employee) query.getSingleResult();
+    public List<Employee> findByName(String name, String employeeCode, String department) {
+        String sql = "select e from Employee e where 1=1 ";
+
+        if (!"".equals(name)) {
+            sql = sql + " and (e.name like:name)";
+        }
+        if (!"".equals(employeeCode)) {
+            sql = sql + " and (e.employeeCode like:employeeCode)";
+        }
+        if (!"".equals(department)) {
+            sql = sql + " and (e.department like:department)";
+        }
+//        if (salary != null) {
+//            sql = sql + " and (e.department between :num1 and :num2)";
+//        }
+
+        Query query = entityManager.createQuery(sql);
+
+        if (!"".equals(name)) {
+            query.setParameter("name", "%" + name + "%");
+        }
+        if (!"".equals(employeeCode)) {
+            query.setParameter("employeeCode", "%" + employeeCode + "%");
+        }
+        if (!"".equals(department)) {
+            query.setParameter("department", "%" + department + "%");
+        }
+//        if (salary != null) {
+//            query.setParameter("num1", salary);
+//        }
+
+        return query.getResultList();
     }
 
     @Override
     @Transactional
     public void create(Employee employee) {
-       this.entityManager.persist(employee);
+        this.entityManager.persist(employee);
 
     }
 

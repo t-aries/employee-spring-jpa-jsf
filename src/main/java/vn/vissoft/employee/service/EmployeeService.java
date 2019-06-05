@@ -9,7 +9,7 @@ public interface EmployeeService {
 
     List<Employee> findAll();
 
-    Employee findById(Long id);
+    List findByName(String name, String employeeCode, String department);
 
     void create(Employee employee);
 
