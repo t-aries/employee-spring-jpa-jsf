@@ -12,6 +12,7 @@ public class Employee implements Serializable {
     @Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+    @Column( name = "id")
     private Long id;
 
     @Column(name = "employee_code")

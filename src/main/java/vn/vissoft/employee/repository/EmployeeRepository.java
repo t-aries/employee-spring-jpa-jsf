@@ -7,9 +7,11 @@ import java.util.List;
 
 public interface EmployeeRepository {
 
-    List findAll();
+    List<Employee> findAll();
 
     List findByName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo);
+
+    Employee findById(Long id);
 
     void create(Employee employee);
 

@@ -28,6 +28,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findByName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo) {
         return employeeRepository.findByName(name,employeeCode,department, salaryFrom, salaryTo);
     }
+    @Override
+    public  Employee findById(Long id) {
+        return employeeRepository.findById(id);
+    }
 
     @Override
     public void create(Employee employee) {

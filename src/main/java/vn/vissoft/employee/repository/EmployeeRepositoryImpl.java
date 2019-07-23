@@ -18,7 +18,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public List<Employee> findAll() {
-
         Query query = entityManager.createQuery("select e FROM Employee e");
         return query.getResultList();
 
@@ -41,10 +40,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             sql = sql + " and (e.department like:department)";
         }
 
-        if (salaryFrom != null) {
+        if (salaryFrom != 0) {
             sql = sql + " and (e.salary >:salaryFrom )";
         }
-        if (salaryTo != null) {
+        if (salaryTo != 0) {
             sql = sql + " and (e.salary <:salaryTo )";
         }
 
@@ -59,19 +58,23 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         if (!"".equals(department)) {
             query.setParameter("department", "%" + department + "%");
         }
-
-        Double num1=null;
-        Double num2 = null;
-        if (salaryFrom != null) {
+        if (salaryFrom != 0) {
             query.setParameter("salaryFrom", salaryFrom);
             // query.setParameter("num2", salary);
         }
-        if (salaryTo != null) {
+        if (salaryTo != 0) {
             query.setParameter("salaryTo", salaryTo);
             // query.setParameter("num2", salary);
         }
 
         return query.getResultList();
+    }
+
+    @Override
+    public Employee findById(Long id) {
+        Query sql = entityManager.createQuery("select e FROM Employee e where 1=1 and (e.id =: id)");
+        sql.setParameter("id", id);
+        return (Employee) sql.getResultList().stream().findFirst().orElse(null);
     }
 
     @Override

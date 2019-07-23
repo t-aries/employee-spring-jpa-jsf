@@ -11,6 +11,8 @@ public interface EmployeeService {
 
     List findByName(String name, String employeeCode, String department, Double salaryFrom, Double salaryTo);
 
+    Employee findById(Long id);
+
     void create(Employee employee);
 
     void update(Employee employee);
